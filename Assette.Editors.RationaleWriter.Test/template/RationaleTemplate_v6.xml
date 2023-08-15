@@ -11,9 +11,9 @@
 			{% for subCategory in rationale.SubCategories %}
 			<table id='table-{{ subCategory.TitleId }}' style='table-style:val=TableGrid;table-grid:width = 9090;table-width:width = 0, type = Auto;table-indentation:width = 90, type = Dxa;table-border:val = none, color = auto, size = 0, space = 0; shading:val=clear,color=auto,fill=C2D72B;table-look:val=04A0,first-row=true,last-row=false,first-column=true,last-column=false,no-horizontal-band=false,no-vertical-band=true;'>
 				<tr id='table-row-{{ subCategory.TitleId }}' style='table-row-height:648'>
-					<td id='table-row-td-{{ subCategory.TitleId }}' style='table-cell-width:width = 9090, type= Dxa;shading:val=clear,color=auto,fill=C2D72B;table-cell-vertical-alignment=Center'>
-						<p id='table-row-td-p-{{ subCategory.TitleId }}' style='spacing:line=276,line-rule=auto;font-size:20.0pt;font-family:Calibri;color:#707070;font-weight:bold;'>
-							<span style='font-size:24.0pt;line-height:115%;font-family:Calibri;color:#707070;font-weight:bold'>
+					<td id='table-row-td-{{ subCategory.TitleId }}' style='table-cell-width:width = 9090, type= Dxa;shading:val=clear,color=auto,fill=#C2D72B;table-cell-vertical-alignment:center'>
+						<p id='table-row-td-p-{{ subCategory.TitleId }}' style='spacing:line=276,line-rule=auto;font-size:20.0pt;font-family:Calibri;color:#707070;'>
+							<span style='font-size:24.0pt;line-height:115%;font-family:Calibri;color:#707070;'>
 								<span xml:space="preserve" style='mso-spacerun:yes'></span>
 							</span>
 							<span id='table-row-td-p-sp-{{ subCategory.TitleId }}' style='font-size:20.0pt;font-family:east-asia-theme = MinorEastAsia,complex-script-theme=MinorBidi;color:val=#FFFFFF,theme-color=Background1;letter-spacing:.75pt;font-weight:bold;'>{{ subCategory.Title }}</span>

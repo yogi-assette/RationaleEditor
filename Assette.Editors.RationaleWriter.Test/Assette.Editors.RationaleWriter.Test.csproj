@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assette.Editors.RationaleWriter\Assette.Editors.InvestmentWriter.csproj" />
+    <ProjectReference Include="..\Assette.Editors.RationaleWriter\Assette.Editors.RationaleWriter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

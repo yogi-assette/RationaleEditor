@@ -8,22 +8,6 @@ using static Assette.Editors.InvestmentWriter.AppEnums;
 namespace Assette.Editors.InvestmentWriter;
 public static class StyleHelper
 {
-    private static void Process(XElement element)
-    {
-        foreach (XElement childElement in element.Elements())
-        {
-            switch (childElement.Name.LocalName)
-            {
-                case "p":
-                    break;
-                case "span":
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
     private static RunProperties SdtRunProperties
     {
         get
@@ -106,7 +90,7 @@ public static class StyleHelper
 
         ParagraphProperties paragraphProperties = new();
         ParagraphMarkRunProperties paragraphMarkRunProperties = new();
-        var styleNameValues = ExtractStyles(styles, ElementType.Paragraph);
+        var styleNameValues = ExtractStyles(styles, ElementType.Paragraph, PropertiesType.ParagraphMarkRunProperties);
         ApplyStyles(paragraphMarkRunProperties, styleNameValues);
         paragraphProperties.AppendChild(paragraphMarkRunProperties);
 
@@ -610,7 +594,7 @@ public static class StyleHelper
         }
     }
 
-    public static IDictionary<AppEnums.StyleName, IList<KeyValuePair<StyleKey, string>>> ExtractStyles(string? styles, ElementType elementType, PropertiesType propertiesType = PropertiesType.DefaultProperties)
+    public static IDictionary<AppEnums.StyleName, IList<KeyValuePair<StyleKey, string>>> ExtractStyles(string? styles, ElementType elementType, PropertiesType propertiesType)
     {
         styles = string.IsNullOrWhiteSpace(styles) ? GetDefaultStyle(elementType) : styles;
 
@@ -735,20 +719,18 @@ public static class StyleHelper
         }
     }
 
-    public static void AppendSpans<T>(this T compositeElement, XElement element, IEnumerable<XElement> spanElements)
+    public static void AppendSpans<T>(this T compositeElement, XElement paragraphElement, IEnumerable<XElement> spanElements)
         where T : TypedOpenXmlCompositeElement
     {
-        string? styles = element.Attribute("style")?.Value;
+        string? styles = paragraphElement.Attribute("style")?.Value;
 
         ParagraphMarkRunProperties paragraphMarkRunProperties = new();
-        var styleNameValuePairs = ExtractStyles(styles, ElementType.Paragraph);
+        var styleNameValuePairs = ExtractStyles(styles, ElementType.Paragraph, PropertiesType.ParagraphMarkRunProperties);
         ApplyStyles(paragraphMarkRunProperties, styleNameValuePairs);
 
         ParagraphProperties paragraphProperties = new();
-
-        styleNameValuePairs = ExtractStyles(styles, ElementType.Span, PropertiesType.ParagraphProperties);
+        styleNameValuePairs = ExtractStyles(styles, ElementType.Paragraph, PropertiesType.ParagraphProperties);
         ApplyStyles(paragraphProperties, styleNameValuePairs);
-
         paragraphProperties.AppendChild(paragraphMarkRunProperties);
 
         List<Run> runList = new();
@@ -759,7 +741,7 @@ public static class StyleHelper
                 Run spanRun = new();
                 RunProperties spanRunProperties = new();
                 styles = spanElement.Attribute("style")?.Value;
-                styleNameValuePairs = ExtractStyles(styles, ElementType.Span);
+                styleNameValuePairs = ExtractStyles(styles, ElementType.Span, PropertiesType.RunProperties);
                 ApplyStyles(spanRunProperties, styleNameValuePairs);
                 spanRun.AppendChild(spanRunProperties);
                 spanRun.AppendChild(new Text() { Text = spanElement.Value.Replace(' ', '\u00A0') });
