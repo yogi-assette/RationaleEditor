@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rationale>
+	<version>{{ rationale.Version }}</version>
+    <title>{{ rationale.Title }}</title>
+    <categoryTitle>{{ rationale.CategoryTitle }}</categoryTitle>
+    <overview>
+        <title>{{ rationale.Overview.Title }}</title>
+        <identifier>{{ rationale.Overview.Identifier }}</identifier>
+    </overview>
+    <subCategories>
+    {% for subCategory in rationale.SubCategories %}
+        <subCategory>
+            <title>{{ subCategory.Title }}</title>
+            <section>
+                <title>{{ subCategory.Section.Title }}</title>
+                <identifier>{{ subCategory.Section.Identifier }}</identifier>
+            </section>
+            <topXRationales>
+          {% for topXRationale in subCategory.TopXRationales %}
+                <topXRationale>
+                    <title>{{ topXRationale.Title }}</title>
+                    <sectionWithRankList>
+                {% for sectionWithRank in topXRationale.SectionWithRankList %}
+                        <sectionWithRank>
+                            <title>{{ sectionWithRank.Title }}</title>
+                            <ranks>
+                      {% for rank in sectionWithRank.Ranks %}
+                                <rank>{{ rank }}</rank>
+                      {% endfor %}
+                            </ranks>
+                            <identifier>{{ sectionWithRank.Identifier }}</identifier>
+                        </sectionWithRank>
+                {% endfor %}
+                    </sectionWithRankList>
+                </topXRationale>
+          {% endfor %}
+            </topXRationales>
+        </subCategory>
+    {% endfor %}
+    </subCategories>
+</rationale>

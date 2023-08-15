@@ -1,0 +1,64 @@
+# .NET build folders
+bin/
+obj/
+
+# Visual Studio files
+.vscode/
+.vs/
+
+# Compiled files
+*.dll
+*.exe
+*.pdb
+
+# NuGet packages
+*.nuget.cache/
+*.dll.nuget.cache
+
+# User-specific files
+*.user
+*.userprefs
+
+# Logs and debugging data
+*.log
+*.vspscc
+
+# Rider files
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Package files
+*.nupkg
+*.paket.*
+
+# Cake artifacts
+/artifacts/
+
+# Unity generated folders
+/Library/
+/Temp/
+/obj/
+
+# Rider generated files
+/ReSharper*/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archive files
+_archive/

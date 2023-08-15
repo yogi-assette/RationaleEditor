@@ -1,0 +1,261 @@
+<div id="rationale-3">
+    <h2 id="rationale-4" style="font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;">Sector Attribution Overview-1</h2>
+    <input id="overview-1"></input>
+</div>
+<div>
+    <div id="rationale-5">
+        <h2 id="rationale-6">Absolute</h2>
+    </div>
+    <div id="rationale-5">
+        <h2 id="rationale-6">Relative</h2>
+    </div>
+</div>
+
+< table class=MsoTableGrid border = 0 cellspacing=0 cellpadding=0 style='margin-left:4.5pt;background:#C2D72B;border-collapse:collapse;
+ border:none;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:none;mso-border-insidev:none'>
+    <tr style = 'mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes;
+  height:.45in'>
+        <td width = 606 style='width:454.5pt;padding:0in 5.4pt 0in 5.4pt;height:.45in'>
+            <p class=MsoNormal style = 'line-height:115%' >
+                < b >< span style='font-size:24.0pt;
+  line-height:115%;mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri;
+  mso-bidi-font-family:Calibri;color:#707070'>
+                    <span style='mso-spacerun:yes'></span>
+                </span>
+            </b>
+            <b>
+                <span style = 'font-size:20.0pt;
+  line-height:115%;mso-fareast-font-family:"Times New Roman";mso-fareast-theme-font:
+  minor-fareast;mso-bidi-font-family:"Iskoola Pota";mso-bidi-theme-font:minor-bidi;
+  color:white;mso-themecolor:background1;letter-spacing:.75pt'>Absolute</span>
+            </b>
+            <b>
+                <span style='font-size:20.0pt;line-height:115%;mso-ascii-font-family:Calibri;
+  mso-hansi-font-family:Calibri;mso-bidi-font-family:Calibri;color:#707070'>
+                    <o:p></o:p>
+                </span>
+            </b>
+        </p>
+    </td>
+</tr>
+</table>
+
+XElement:
+"<div id=""rationale-5"">
+<h2 id=""rationale-6"">Absolute</h2>
+</div>"
+"<h2 id=""rationale-6"">Absolute</h2>"
+"<div id=""rationale-5"">
+<h2 id=""rationale-6"">Relative</h2>
+</div>"
+"<h2 id=""rationale-6"">Relative</h2>"
+
+
+<document version="1.0.0">
+<body>
+    <h1 id="6a0cdcf7-dba1-4b6f-9bc7-0a7f8dd18847" style="font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;">Rationale for Large Cap Value | Equities</h1>
+    <h2 id="294ac426-3224-4113-82ea-1e46761752b4" style="margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;">Sector Attribution</h2>
+    <div id="div-1">
+        <h2 id="f1ff63c6-f138-4e6c-9b45-d617f0ac650f" style="font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;">Sector Attribution Overview-1</h2>
+        <input id="fb518ef6-c701-43fe-ab28-aadf567d0961"></input>
+    </div>
+    <div id="div-2">
+
+        <div id="div-3">
+            <h2 id="0c803cf3-010e-480b-ae43-c05f08d6eded">Absolute</h2>
+        </div>
+        <div id="div-4">
+            <h2 id="2d59deec-497d-4c66-8289-a2433ebf9bee">Absolute Summary</h2>
+            <input id="e32318f2-e0af-4fc9-a3f4-4ed3c28c2936"></input>
+        </div>
+        <div id="div-5">
+
+            <div id="div-6">
+                <h2 id="98b0dfdf-d461-447b-86e1-30c1a11fd384">Top 5 Absolute Contributors (5)</h2>
+                <div id="div-7">
+
+                    <div id="div-8">
+                        <h2 id="38236324-9202-4bbe-8a28-0ffb31c42a3f">Information Technology </h2>
+                        <div id="div-9">
+
+                            <h2 id="82ba8112-16da-451b-892a-07496f6c2463">1, 2</h2>
+                        </div>
+                        <input id="7b59a01b-14c6-4854-8584-7d7eba4a736e"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="f5afa7f2-5859-4d33-b0f9-3b943a9e9081">Industrials </h2>
+                        <div id="div-9">
+
+                            <h2 id="ddd077f8-c851-451f-a092-54a039e49d15">2</h2>
+                        </div>
+                        <input id="5061abda-d15a-49a7-9c21-04faf1876233"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="04638e67-3239-4a9d-a8c8-c043cc06e6bb">Health Care </h2>
+                        <div id="div-9">
+
+                            <h2 id="6e12ef85-6406-468c-b7e1-6bfe4201e1f4">3</h2>
+                        </div>
+                        <input id="e15bddfd-b2f4-429f-8c77-065207cf40fb"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="15539e83-b669-418a-aaed-7fc80f484b55">Consumer Discretionary </h2>
+                        <div id="div-9">
+
+                            <h2 id="36ed9e32-79a9-42d7-9f2f-f4dae04ebfe7">4</h2>
+                        </div>
+                        <input id="0645a5c2-e245-41b3-a63c-645e695178cd"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="3eae206c-456b-465d-bf0e-67b852c7602d">Financials </h2>
+                        <div id="div-9">
+
+                            <h2 id="f81c501d-a028-4341-a6d5-8f64c4a5a44f">5</h2>
+                        </div>
+                        <input id="6392c041-c997-482d-9663-0c4df2c9fd26"></input>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="div-6">
+                <h2 id="1f0217dd-37ad-461d-85b6-530461ded8b7">Top 5 Absolute Detractors (3)</h2>
+                <div id="div-7">
+
+                    <div id="div-8">
+                        <h2 id="48b1c4ff-6e72-4e9a-a54d-0cdfa486f8ef">Financials </h2>
+                        <div id="div-9">
+
+                            <h2 id="8ae8fabf-1255-4e78-b614-394864ae82d9">1</h2>
+                        </div>
+                        <input id="d592f919-0ea9-4666-bb9b-c6ee11fce5ab"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="f5341fc3-8787-4661-99c0-12dc435f66f6">Energy </h2>
+                        <div id="div-9">
+
+                            <h2 id="93d9cf3f-3547-473d-a7bf-2516cb718e54">2</h2>
+                        </div>
+                        <input id="e5b0a679-9049-4aec-b1e0-28ba15cb63a4"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="1fcaa1ea-452b-49c6-9f48-8743d657ee9c">Communication Services </h2>
+                        <div id="div-9">
+
+                            <h2 id="f06c5291-e466-4fb0-9b59-8bd4fad42973">3</h2>
+                        </div>
+                        <input id="4e77fb34-38e2-4960-9435-5dbc8e49f5e6"></input>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="div-3">
+            <h2 id="8d791395-2ff5-46c7-b181-6c43ad2d77f8">Relative</h2>
+        </div>
+        <div id="div-4">
+            <h2 id="f3ec03cd-fff7-4ccb-a738-6d54c7df071d">Relative Summary</h2>
+            <input id="ba0b1900-0dd1-4ea0-ae52-7f413a68a486"></input>
+        </div>
+        <div id="div-5">
+
+            <div id="div-6">
+                <h2 id="5979deb3-576e-4132-9012-2584c0266ba3">Top 5 Relative Contributors (5)</h2>
+                <div id="div-7">
+
+                    <div id="div-8">
+                        <h2 id="0fef2ef2-569e-4498-9ea8-fcc6cf1d218f">Information Technology </h2>
+                        <div id="div-9">
+
+                            <h2 id="ba8e9d02-93f1-428b-9b06-0782df5b4156">1, 2</h2>
+                        </div>
+                        <input id="d047d92b-6a84-4e4b-ab67-5e628c52f1bb"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="b0f2b162-8387-4ce8-bb20-d5ca99cb3726">Industrials </h2>
+                        <div id="div-9">
+
+                            <h2 id="240042f8-b517-4b0b-b2bb-70d8a4f98b9b">2</h2>
+                        </div>
+                        <input id="ee125dcb-8a9e-42dd-89f3-8d8f883863da"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="b3c617a3-147c-4818-acbe-c51a2d3a201f">Health Care </h2>
+                        <div id="div-9">
+
+                            <h2 id="23540176-f05c-4ba9-afaa-3954b1237182">3</h2>
+                        </div>
+                        <input id="d1b0bd10-3e81-4aad-9965-c44fe3cfcf19"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="ee325ada-54c2-47c7-aae7-64f8acaca0a9">Consumer Discretionary </h2>
+                        <div id="div-9">
+
+                            <h2 id="22a7272c-b4cf-49a3-b19c-fb934028936f">4</h2>
+                        </div>
+                        <input id="dcf2f7f7-20c9-41f1-9a07-00c51efa49c7"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="9698f4ad-d840-4f59-a19c-24153c9cfb7f">Financials </h2>
+                        <div id="div-9">
+
+                            <h2 id="259bcffe-5138-409b-aeb3-147f9e5a4b20">5</h2>
+                        </div>
+                        <input id="7d4f0524-62cf-4f2c-9f5e-2f61be332dd0"></input>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="div-6">
+                <h2 id="a6677660-637e-476d-ad4f-6dfb74a07ea7">Top 5 Relative Detractors (3)</h2>
+                <div id="div-7">
+
+                    <div id="div-8">
+                        <h2 id="d487e7bd-73bc-404c-855b-ab58389f1580">Financials </h2>
+                        <div id="div-9">
+
+                            <h2 id="373202e5-205a-4560-ba69-0cf1c1079f67">1</h2>
+                        </div>
+                        <input id="a1be8d03-d949-4709-b3a6-8dce3e817f31"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="bbb11b49-3bd1-4b29-9809-8efa129458af">Energy </h2>
+                        <div id="div-9">
+
+                            <h2 id="b1c92056-b146-48c7-89bc-ce148f572f7d">2</h2>
+                        </div>
+                        <input id="ca625cf2-15a4-49b7-896e-a4e4239c4c92"></input>
+                    </div>
+
+                    <div id="div-8">
+                        <h2 id="cedab7bc-1254-4817-8a41-7f080d220026">Communication Services </h2>
+                        <div id="div-9">
+
+                            <h2 id="6297404f-16ad-4426-8bda-f024fb6b7e85">3</h2>
+                        </div>
+                        <input id="9b3e3345-7793-4a21-a9d2-ed40ec95a45f"></input>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</document>

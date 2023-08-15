@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document version="1.0.0">
+	<body>
+		<h1 style="font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;">{{ rationale.Title }}</h1>
+		<h2 style="margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;">{{ rationale.CategoryTitle }}</h2>
+		<div>
+			<h2 style="font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;">{{ rationale.Overview.Title }}</h2>
+			<input id='{{ rationale.Overview.Identifier }}'></input>
+		</div>
+		<div>
+			{% for subCategory in rationale.SubCategories %}
+			<div>
+				<h2>{{ subCategory.Title }}</h2>
+				<div>
+					<h2>{{ subCategory.Section.Title }}</h2>
+					<input id='{{ subCategory.Section.Identifier }}'></input>
+				</div>
+				<div>
+					{% for topXRationale in subCategory.TopXRationales %}
+					<div>
+						<h2>{{ topXRationale.Title }}</h2>
+						<div>
+							{% for sectionWithRank in topXRationale.SectionWithRankList %}
+							<div>
+								<h2>{{ sectionWithRank.Title }}</h2>
+								<div>
+									{% assign ranks = sectionWithRank.Ranks %}
+									<h2>{{ ranks | join: ', ' }}</h2>
+								</div>
+								<input id='{{ sectionWithRank.Identifier }}'></input>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</body>
+</document>

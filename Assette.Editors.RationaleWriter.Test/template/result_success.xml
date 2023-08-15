@@ -1,0 +1,207 @@
+﻿<document version="1.0.0">
+	<body>
+		<h1 style="font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;">Rationale for Large Cap Value | Equities</h1>
+		<h2 style="margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;">Sector Attribution</h2>
+		<div>
+			<h2 style="font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;">Sector Attribution Overview-1</h2>
+			<input id="overview-1"></input>
+		</div>
+		<div>
+
+			<div>
+				<h2>Absolute</h2>
+				<div>
+					<h2>Absolute Summary</h2>
+					<input id="absolute-1"></input>
+				</div>
+				<div>
+
+					<div>
+						<h2>Top 5 Absolute Contributors (5)</h2>
+						<div>
+
+							<div>
+								<h2>Information Technology</h2>
+								<div>
+
+									<h2>1, 2</h2>
+								</div>
+								<input id="abs-cont-information-technology-1"></input>
+							</div>
+
+							<div>
+								<h2>Industrials</h2>
+								<div>
+
+									<h2>2</h2>
+								</div>
+								<input id="abs-cont-industrials-2"></input>
+							</div>
+
+							<div>
+								<h2>Health Care</h2>
+								<div>
+
+									<h2>3</h2>
+								</div>
+								<input id="abs-cont-health-care-3"></input>
+							</div>
+
+							<div>
+								<h2>Consumer Discretionary</h2>
+								<div>
+
+									<h2>4</h2>
+								</div>
+								<input id="abs-cont-consumer-discretionary-4"></input>
+							</div>
+
+							<div>
+								<h2>Financials</h2>
+								<div>
+
+									<h2>5</h2>
+								</div>
+								<input id="abs-cont-financials-5"></input>
+							</div>
+
+						</div>
+					</div>
+
+					<div>
+						<h2>Top 5 Absolute Detractors (3)</h2>
+						<div>
+
+							<div>
+								<h2>Financials</h2>
+								<div>
+
+									<h2>1</h2>
+								</div>
+								<input id="abs-det-financials-1"></input>
+							</div>
+
+							<div>
+								<h2>Energy</h2>
+								<div>
+
+									<h2>2</h2>
+								</div>
+								<input id="abs-det-energy-2"></input>
+							</div>
+
+							<div>
+								<h2>Communication Services</h2>
+								<div>
+
+									<h2>3</h2>
+								</div>
+								<input id="abs-det-communication-services-3"></input>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div>
+				<h2>Relative</h2>
+				<div>
+					<h2>Relative Summary</h2>
+					<input id="relative-1"></input>
+				</div>
+				<div>
+
+					<div>
+						<h2>Top 5 Relative Contributors (5)</h2>
+						<div>
+
+							<div>
+								<h2>Information Technology</h2>
+								<div>
+
+									<h2>1, 2</h2>
+								</div>
+								<input id="rel-cont-information-technology-1"></input>
+							</div>
+
+							<div>
+								<h2>Industrials</h2>
+								<div>
+
+									<h2>2</h2>
+								</div>
+								<input id="rel-cont-industrials-2"></input>
+							</div>
+
+							<div>
+								<h2>Health Care</h2>
+								<div>
+
+									<h2>3</h2>
+								</div>
+								<input id="rel-cont-health-care-3"></input>
+							</div>
+
+							<div>
+								<h2>Consumer Discretionary</h2>
+								<div>
+
+									<h2>4</h2>
+								</div>
+								<input id="rel-cont-consumer-discretionary-4"></input>
+							</div>
+
+							<div>
+								<h2>Financials</h2>
+								<div>
+
+									<h2>5</h2>
+								</div>
+								<input id="rel-cont-financials-5"></input>
+							</div>
+
+						</div>
+					</div>
+
+					<div>
+						<h2>Top 5 Relative Detractors (3)</h2>
+						<div>
+
+							<div>
+								<h2>Financials</h2>
+								<div>
+
+									<h2>1</h2>
+								</div>
+								<input id="rel-det-financials-1"></input>
+							</div>
+
+							<div>
+								<h2>Energy</h2>
+								<div>
+
+									<h2>2</h2>
+								</div>
+								<input id="rel-det-energy-2"></input>
+							</div>
+
+							<div>
+								<h2>Communication Services</h2>
+								<div>
+
+									<h2>3</h2>
+								</div>
+								<input id="rel-det-communication-services-3"></input>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</body>
+</document>

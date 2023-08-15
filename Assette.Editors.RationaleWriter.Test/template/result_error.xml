@@ -1,0 +1,539 @@
+﻿<rationale>
+	<title>Sample Rationale</title>
+	<categoryTitle>Missing property. Did you mean 'category_title'?</categoryTitle>
+	<overview>
+		<title>Liquid syntax error: Object 'Section { Title = Sample Overview, Identifier = overview-1 }' is invalid because it is neither a built-in type nor implements ILiquidizable</title>
+		<identifier>Liquid syntax error: Object 'Section { Title = Sample Overview, Identifier = overview-1 }' is invalid because it is neither a built-in type nor implements ILiquidizable</identifier>
+	</overview>
+	<subCategories>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+		<subCategory>
+			<title></title>
+			<section>
+				<title></title>
+				<identifier></identifier>
+			</section>
+			<topXRationales>
+
+			</topXRationales>
+		</subCategory>
+
+	</subCategories>
+</rationale>

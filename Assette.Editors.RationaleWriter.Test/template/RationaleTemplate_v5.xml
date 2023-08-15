@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document version='1.0.0'>
+	<body>
+		<h1 id='{{ rationale.TitleId }}' style='font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;'>{{ rationale.Title }}</h1>
+		<h2 id='{{ rationale.CategoryTitleId }}' style='margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;'>{{ rationale.CategoryTitle }}</h2>
+		<div id='div-1'>
+			<h2 id='{{ rationale.Overview.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;'>{{ rationale.Overview.Title }}</h2>
+			<input id='{{ rationale.Overview.InputId }}'></input>
+		</div>
+		<div id='div-2'>
+			{% for subCategory in rationale.SubCategories %}
+			<div id='div-3'>
+				<h2 id='{{ subCategory.TitleId }}'>{{ subCategory.Title }}</h2>
+			</div>
+			<div id='div-4'>
+				<h2 id='{{ subCategory.Section.TitleId }}'>{{ subCategory.Section.Title }}</h2>
+				<input id='{{ subCategory.Section.InputId }}'></input>
+			</div>
+			<div id='div-5'>
+				{% for topXRationale in subCategory.TopXRationales %}
+				<div id='div-6'>
+					<h2 id='{{ topXRationale.TitleId }}'>{{ topXRationale.Title }}</h2>
+					<div id='div-7'>
+						{% for sectionWithRank in topXRationale.SectionWithRankList %}
+						<div id='div-8'>
+							<p id='{{ sectionWithRank.TitleId }}'>
+								<span id='top-title_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-weight:bold;'>{{ sectionWithRank.Title }}</span>
+								<span id='pipe_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#707070;letter-spacing:.75pt;font-weight:bold;'> | </span>
+								<span id='rank_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:gray;letter-spacing:.75pt;font-weight:bold;'>Rank </span>
+								<span id='rank-ranks_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#A5B82A;letter-spacing:.75pt;font-weight:bold;'>{{ ranks | join: ', ' }}</span>
+								<!--<span id='rank-one_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#A5B82A;letter-spacing:.75pt;font-weight:bold;'>1</span>
+								<span id='rank-comma_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#B1C42B;letter-spacing:.75pt;font-weight:bold'>,</span>
+								<span id='rank-two_{{ sectionWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#EAB00C;letter-spacing:.75pt;font-weight:bold'>2</span>-->
+							</p>
+							<!--<h2 id='{{ sectionWithRank.TitleId }}'>{{ sectionWithRank.Title }} </h2>
+							<div id='div-9'>
+								{% assign ranks = sectionWithRank.Ranks %}
+								<h2 id='{{ sectionWithRank.RankId }}'>{{ ranks | join: ', ' }}</h2>
+							</div>-->
+							<input id='{{ sectionWithRank.InputId }}'></input>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</div>
+	</body>
+</document>
