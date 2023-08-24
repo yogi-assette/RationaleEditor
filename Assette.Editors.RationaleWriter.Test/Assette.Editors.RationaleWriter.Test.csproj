@@ -30,6 +30,9 @@
     <None Update="documents\test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="template\RationaleTemplate_v7.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="template\RationaleTemplate_v6.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

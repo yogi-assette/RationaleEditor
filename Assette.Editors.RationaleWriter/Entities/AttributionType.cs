@@ -3,8 +3,8 @@
 namespace Assette.Editors.InvestmentWriter.Entities;
 public readonly record struct AttributionType : ILiquidizable
 {
-    public string Title { get; init; }
     public readonly string TitleId { get { return Guid.NewGuid().ToString(); } }
+    public string Title { get; init; }
     public SectorAttribution Section { get; init; }
     public IList<TopAttribution> TopAttributions { get; init; }
 

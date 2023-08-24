@@ -62,3 +62,4 @@ ehthumbs.db
 
 # Archive files
 _archive/
+*.csv

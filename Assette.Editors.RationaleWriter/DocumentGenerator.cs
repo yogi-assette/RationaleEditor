@@ -205,6 +205,32 @@ public class DocumentGenerator
         document?.AppendChild(body);
         mainPart.Document = document ?? new Document();
         mainPart.Document?.Save();
+    }
 
+    public static byte[] Create(string rationaleXml)
+    {
+        XDocument xDocument = XDocument.Parse(rationaleXml, LoadOptions.PreserveWhitespace);
+        Validate(xDocument, out XElement? bodyElement);
+
+        using MemoryStream stream = new();
+        using WordprocessingDocument wordDocument = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document);
+        MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+        mainPart.AddStylesPartToPackage();
+
+        Body body = new();
+        HashSet<string> processedIds = new();
+
+        Build(body, bodyElement?.Elements(), processedIds);
+
+        Document document = new();
+        document.AddNamespaces();
+        document?.AppendChild(body);
+        mainPart.Document = document ?? new Document();
+        mainPart.Document?.Save();
+
+        wordDocument.Dispose();
+
+        stream.Flush();
+        return stream.ToArray();
     }
 }

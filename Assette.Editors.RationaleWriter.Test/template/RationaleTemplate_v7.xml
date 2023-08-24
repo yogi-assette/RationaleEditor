@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document version='1.0.0'>
+	<body>
+		<h1 id='{{ data.TitleId }}' style='font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;'>{{ data.Title }}</h1>
+		<h2 id='{{ data.CategoryTitleId }}' style='margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;'>{{ data.CategoryTitle }}</h2>
+		<div id='div-1'>
+			<h2 id='{{ data.Overview.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-family:Calibri;font-weight:bold;'>{{ data.Overview.Title }}</h2>
+			<input id='{{ data.Overview.InputId }}' style='table-cell-width:width = 9124,type = Dxa'></input>
+		</div>
+		<div id='div-2'>
+			{% for subCategory in data["SubCategories"] %}
+			<table id='table-{{ subCategory.TitleId }}' style='table-style:val=TableGrid;table-grid:width = 9090;table-width:width = 0, type = Auto;table-indentation:width = 90, type = Dxa;table-border:val = none, color = auto, size = 0, space = 0; shading:val=clear,color=auto,fill=C2D72B;table-look:val=04A0,first-row=true,last-row=false,first-column=true,last-column=false,no-horizontal-band=false,no-vertical-band=true;'>
+				<tr id='table-row-{{ subCategory.TitleId }}' style='table-row-height:648'>
+					<td id='table-row-td-{{ subCategory.TitleId }}' style='table-cell-width:width = 9090, type= Dxa;shading:val=clear,color=auto,fill=#C2D72B;table-cell-vertical-alignment:center'>
+						<p id='table-row-td-p-{{ subCategory.TitleId }}' style='spacing:line=276,line-rule=auto;font-size:20.0pt;font-family:Calibri;color:#707070;'>
+							<span style='font-size:24.0pt;line-height:115%;font-family:Calibri;color:#707070;'>
+								<span xml:space="preserve" style='mso-spacerun:yes'></span>
+							</span>
+							<span id='table-row-td-p-sp-{{ subCategory.TitleId }}' style='font-size:20.0pt;font-family:east-asia-theme = MinorEastAsia,complex-script-theme=MinorBidi;color:val=#FFFFFF,theme-color=Background1;letter-spacing:.75pt;font-weight:bold;'>{{ subCategory.Title }}</span>
+						</p>
+					</td>
+				</tr>
+			</table>
+			<div id='div-4'>
+				<h2 id='{{ subCategory.Section.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-weight:bold;'>{{ subCategory["Section"]["Title"] }}</h2>
+				<input id='{{ subCategory.Section.InputId }}' style='table-cell-width:width = 9124,type = Dxa'></input>
+			</div>
+
+			<div id='div-5'>
+				{% for topAttribution in subCategory.TopAttributions %}
+				<div id='div-6'>
+					<h2 id='{{ topAttribution.TitleId }}' style='font-size:16.0pt;color:#B1C42B;letter-spacing:.75pt;font-weight:bold;'>{{ topAttribution.Title }}</h2>
+					<div id='div-7'>
+						{% for sectorWithRank in topAttribution.SectorAttributionWithRanks %}
+						<div id='div-8'>
+							<p id='{{ sectorWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#B1C42B;letter-spacing:.75pt;'>
+								<span id='top-title_{{ sectorWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#B1C42B;letter-spacing:.75pt;font-weight:bold;'>{{ sectorWithRank.Title }}</span>
+								<span id='pipe_{{ sectorWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#707070;letter-spacing:.75pt;'> | </span>
+								<span id='rank_{{ sectorWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#B1C42B;letter-spacing:.75pt;'>Rank </span>
+								{% assign ranks = sectorWithRank.Ranks %}
+								<span id='rank-ranks_{{ sectorWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#A5B82A;letter-spacing:.75pt;font-weight:bold;'>{{ ranks | join: ', ' }}</span>
+							</p>
+							<input id='{{ sectorWithRank.InputId }}' style='table-cell-width:width = 9124,type = Dxa'></input>
+							<div id='div-9'>
+								<p id='{{ sectorWithRank.TopSecurity.TitleId }}' style='ind:first-line=720;spacing:after=240,line=312,line-rule=auto;font-size:16.0pt;color:#00B0F0;letter-spacing:.75pt;'>{{ sectorWithRank.TopSecurity.Title }}</p>
+								{% for securityWithRank in sectorWithRank.TopSecurity.SecurityAttributionWithRanks  %}
+								<div id='div-10'>
+									<p id='{{ sectorWithRank.TopSecurity.TitleId }}_{{ securityWithRank.TitleId }}' style='ind:first-line=720;font-size:16.0pt;line-height:130%;color:#00B0F0;letter-spacing:.75pt;font-weight:bold;'>
+										<span id='security-title_{{ securityWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#00B0F0;letter-spacing:.75pt;font-weight:bold;'>{{ securityWithRank.Title }}</span>
+										<span id='pipe_{{ securityWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#707070;letter-spacing:.75pt;'> | </span>
+										<span id='rank_{{ securityWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#00B0F0;letter-spacing:.75pt;'>Rank </span>
+										{% assign ranks = securityWithRank.Ranks %}
+										<span id='rank-ranks_{{ securityWithRank.TitleId }}' style='font-size:16.0pt;line-height:130%;color:#00B0F0;letter-spacing:.75pt;font-weight:bold;'>{{ ranks | join: ', ' }}</span>
+									</p>
+									<input id='{{ securityWithRank.InputId }}' style='table-indentation:width = 720, type = Dxa;table-cell-width:width = 8380,type = Dxa'></input>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</div>
+	</body>
+</document>

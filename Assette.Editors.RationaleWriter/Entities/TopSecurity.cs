@@ -4,7 +4,7 @@ namespace Assette.Editors.InvestmentWriter.Entities;
 
 public record TopSecurity : ILiquidizable
 {
-    public static string TitleId { get { return Guid.NewGuid().ToString(); } }
+    public string TitleId { get { return Guid.NewGuid().ToString(); } }
     public required string Title { get; init; }
     public required IList<SecurityAttributionWithRank> SecurityAttributionWithRanks { get; init; }
 
