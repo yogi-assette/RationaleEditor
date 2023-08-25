@@ -1,6 +1,7 @@
-﻿using Assette.Editors.InvestmentWriter.Entities;
+﻿
+using Assette.Editors.ModelMapper.Entities.Rationale;
 
-namespace Assette.Editors.RationaleWriter.Converters;
+namespace Assette.Editors.ModelMapper.Converters;
 
 public class RationaleConverter
 {

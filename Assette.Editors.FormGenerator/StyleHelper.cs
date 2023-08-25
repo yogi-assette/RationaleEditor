@@ -3,9 +3,10 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Xml.Linq;
 using W15 = DocumentFormat.OpenXml.Office2013.Word;
-using static Assette.Editors.InvestmentWriter.AppEnums;
+using static Assette.Editors.FormGenerator.AppEnums;
+using Assette.Editors.FormGenerator;
 
-namespace Assette.Editors.InvestmentWriter;
+namespace Assette.Editors.FormGenerator;
 public static class StyleHelper
 {
     private static RunProperties SdtRunProperties
@@ -148,7 +149,7 @@ public static class StyleHelper
 
         ParagraphMarkRunProperties paragraphMarkRunProperties = new();
         _ = paragraphMarkRunProperties.AppendChild(new RunFonts() { EastAsiaTheme = ThemeFontValues.MinorEastAsia, ComplexScriptTheme = ThemeFontValues.MinorHighAnsi });
-        _ = paragraphMarkRunProperties.AppendChild(new Color() { Val = "#3B3838", ThemeColor = ThemeColorValues.Background2, ThemeShade = "40" });
+        _ = paragraphMarkRunProperties.AppendChild(new Color() { Val = AppConstants.SdtColor, ThemeColor = ThemeColorValues.Background2, ThemeShade = "40" });
         _ = paragraphMarkRunProperties.AppendChild(new Spacing() { Val = 15 });
 
         ParagraphProperties paragraphProperties = new();
@@ -161,7 +162,7 @@ public static class StyleHelper
 
         Run run = new() { RsidRunProperties = "00D7472F" };
         _ = run.AppendChild(runProperties);
-        _ = run.AppendChild(new Text("Click or tap here to enter text."));
+        _ = run.AppendChild(new Text(AppConstants.SdtText));
 
         Paragraph paragraph = new()
         {

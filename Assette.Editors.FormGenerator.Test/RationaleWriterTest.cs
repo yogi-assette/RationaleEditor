@@ -1,14 +1,25 @@
-using Assette.Editors.InvestmentWriter.Entities;
-using Assette.Editors.RationaleWriter.Converters;
-using DocumentFormat.OpenXml.Packaging;
+using Assette.Editors.ModelMapper.Converters;
+using Assette.Editors.ModelMapper.Entities.Rationale;
 using Newtonsoft.Json.Linq;
 
-namespace Assette.Editors.InvestmentWriter.Test;
+namespace Assette.Editors.FormGenerator.Test;
 
-public class InvestmentWriterTest
+public class FormGeneratorTest
 {
 
     private string _docPath = @".\documents\doc_{{guid}}.docx";
+
+    private byte[] GetDocumentByteArray()
+    {
+        string identifier = "5239bd2c-0ce4-4273-8e0e-09bb4302d800";
+        _docPath = _docPath.Replace("{{guid}}", identifier);
+
+        byte[] byteArray = File.ReadAllBytes(_docPath);
+
+        return byteArray;
+    }
+
+    /* TODO: Should be removed
 
     [Fact]
     public void CreateRationaleXml()
@@ -30,16 +41,19 @@ public class InvestmentWriterTest
         Rationale rationale = rationaleTest.Get;
 
         string rationaleXml = XmlGenerator.Create(rationale, _templatePath);
-        DocumentGenerator.Create(_docPath, rationaleXml);
+
+        IDocumentGenerator documentGenerator = new DocumentGenerator();
+        documentGenerator.Generate(_docPath, rationaleXml);
         Assert.True(true);
     }
+    */
 
     [Fact]
     public void CreateDocumentUsingJObject()
     {
         // TODO: Not working...
         string _templatePath = @".\template\RationaleTemplate_v7.xml";
-        
+
         string identifier = Guid.NewGuid().ToString();
         _docPath = _docPath.Replace("{{guid}}", identifier);
 
@@ -47,9 +61,11 @@ public class InvestmentWriterTest
         Rationale rationale = rationaleTest.Get;
 
         JObject jsonRationale = JObject.FromObject(rationale);
-
         string rationaleXml = XmlGenerator.Create(jsonRationale, _templatePath);
-        DocumentGenerator.Create(_docPath, rationaleXml);
+
+        IDocumentGenerator documentGenerator = new DocumentGenerator();
+        documentGenerator.Generate(_docPath, rationaleXml);
+
         Assert.True(true);
     }
 
@@ -66,9 +82,11 @@ public class InvestmentWriterTest
 
         RationaleConverter rationaleConverter = new();
         var rationaleDictionary = rationaleConverter.RationaleToDictionary(rationale);
-
         string rationaleXml = XmlGenerator.Create(rationaleDictionary, _templatePath);
-        DocumentGenerator.Create(_docPath, rationaleXml);
+
+        IDocumentGenerator documentGenerator = new DocumentGenerator();
+        documentGenerator.Generate(_docPath, rationaleXml);
+
         Assert.True(true);
     }
 
@@ -86,13 +104,25 @@ public class InvestmentWriterTest
 
         RationaleConverter rationaleConverter = new();
         var rationaleDictionary = rationaleConverter.RationaleToDictionary(rationale);
-
         string rationaleXml = XmlGenerator.Create(rationaleDictionary, _templatePath);
 
-        byte[] byteArray = DocumentGenerator.Create(rationaleXml);
+        IDocumentGenerator documentGenerator = new DocumentGenerator();
+        byte[] byteArray = documentGenerator.Generate(rationaleXml);
+
         File.WriteAllBytes(_docPath, byteArray);
 
 
         Assert.True(true);
+    }
+
+    [Fact]
+    public void ProcessDocumentUsingByteArray()
+    {
+        byte[] bytes = GetDocumentByteArray();
+
+        IDocumentGenerator documentGenerator = new DocumentGenerator();
+        var sectorData = documentGenerator.Process(bytes);
+
+        Assert.True(sectorData.Count > 0);
     }
 }

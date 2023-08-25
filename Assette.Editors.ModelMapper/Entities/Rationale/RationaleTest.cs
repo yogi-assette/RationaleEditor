@@ -1,4 +1,5 @@
-﻿namespace Assette.Editors.InvestmentWriter.Entities;
+﻿
+namespace Assette.Editors.ModelMapper.Entities.Rationale;
 
 public class RationaleTest
 {
@@ -236,8 +237,6 @@ public class RationaleTest
         }
     };
     */
-
-
 
     private readonly Rationale rationale = new()
     {

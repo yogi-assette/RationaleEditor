@@ -1,6 +1,6 @@
 ﻿using DotLiquid;
 
-namespace Assette.Editors.InvestmentWriter.Entities;
+namespace Assette.Editors.ModelMapper.Entities.Rationale;
 public readonly record struct AttributionType : ILiquidizable
 {
     public readonly string TitleId { get { return Guid.NewGuid().ToString(); } }

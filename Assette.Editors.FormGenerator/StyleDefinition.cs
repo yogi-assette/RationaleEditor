@@ -1,6 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 
-namespace Assette.Editors.InvestmentWriter;
+namespace Assette.Editors.FormGenerator;
 
 public class StyleDefinition
 {

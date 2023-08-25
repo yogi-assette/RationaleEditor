@@ -23,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Assette.Editors.RationaleWriter\Assette.Editors.RationaleWriter.csproj" />
+    <ProjectReference Include="..\Assette.Editors.FormGenerator\Assette.Editors.FormGenerator.csproj" />
+    <ProjectReference Include="..\Assette.Editors.ModelMapper\Assette.Editors.ModelMapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using DotLiquid;
 
-namespace Assette.Editors.InvestmentWriter.Entities;
+namespace Assette.Editors.ModelMapper.Entities.Rationale;
 
 public record Item : ILiquidizable
 {

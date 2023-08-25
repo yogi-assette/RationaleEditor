@@ -4,16 +4,12 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Assette.Editors.InvestmentWriter;
+namespace Assette.Editors.FormGenerator;
 
-public class DocumentGenerator
+public class DocumentGenerator : IDocumentGenerator
 {
     private const string InvalidXmlStructureRootError = "The provided XML string does not have a 'root' element.";
     private const string InvalidXmlStructureBodyError = "The provided XML string is not properly structured with body.";
-
-    protected DocumentGenerator()
-    {
-    }
 
     private static void Validate(XDocument xDocument, out XElement? bodyElement)
     {
@@ -114,28 +110,23 @@ public class DocumentGenerator
         }
     }
 
-    private static List<SectorData> GetSectorHtmlData(MainDocumentPart mainDocPart)
+    private static IList<FormData> ExtractSdtData(Body? body)
     {
-        List<SectorData> sectorData = new();
-        var sdts = mainDocPart?.Document?.Body?.Descendants<SdtElement>() ?? new List<SdtElement>();
-
+        IList<FormData> sectorData = new List<FormData>();
+        var sdts = body?.Descendants<SdtElement>() ?? new List<SdtElement>();
         XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 
         foreach (var sdt in sdts)
         {
-            SectorData data = new();
-
+            FormData data = new();
             var sdtPr = sdt.GetFirstChild<SdtProperties>();
-
             var tag = sdtPr?.GetFirstChild<Tag>();
             data.Id = tag?.GetAttribute("val", w.NamespaceName).Value;
-
             var alias = sdtPr?.GetFirstChild<SdtAlias>();
             data.Name = alias?.GetAttribute("val", w.NamespaceName).Value;
-
             List<string?> lines = new();
-
             var sdtContentBlocks = sdt.Descendants<SdtContentBlock>();
+
             foreach (var sdtContentBlock in sdtContentBlocks)
             {
                 var paragraphs = sdtContentBlock.Descendants<Paragraph>();
@@ -144,51 +135,64 @@ public class DocumentGenerator
                 {
                     StringBuilder line = new();
                     var runs = paragraph.Descendants<Run>();
+
                     foreach (var run in runs)
                     {
                         string? tempText = run.GetFirstChild<Text>()?.Text;
-
-                        var runProperties = run.Descendants<RunProperties>();
-                        foreach (var runProperty in runProperties)
-                        {
-                            if (runProperty.Highlight != null)
-                            {
-                                tempText = $"<mark>{tempText}</mark>";
-                            }
-                            if (runProperty.Color != null)
-                            {
-                                tempText = $"<span style=\"color:#{runProperty.Color.GetAttribute("val", w.NamespaceName).Value}\">{tempText}</span>";
-                            }
-                            if (runProperty.Underline != null)
-                            {
-                                tempText = $"<u>{tempText}</u>";
-                            }
-                            if (runProperty.Bold != null)
-                            {
-                                tempText = $"<strong>{tempText}</strong>";
-                            }
-                            if (runProperty.FontSize != null)
-                            {
-                                var fontSize = runProperty.FontSize.GetAttribute("val", w.NamespaceName).Value;
-                                tempText = $"<span style=\"font-size:{fontSize}pt\">{tempText}</span>";
-                            }
-                        }
-
+                        if (tempText == AppConstants.SdtText) break;
+                        tempText = ApplyRunProperties(run, tempText, w);
                         line.Append(tempText);
                     }
-                    lines.Add(line.ToString());
+                    if (line.Length > 0) lines.Add(line.ToString());
                 }
             }
-            data.Value = $"<p>{string.Join("<br/>", lines)}</p>";
-            sectorData.Add(data);
+
+            if (lines.Count > 0)
+            {
+                data.Value = $"<p>{string.Join("<br/>", lines)}</p>";
+                sectorData.Add(data);
+            }
         }
 
         return sectorData;
     }
 
-    public static void Create(string docPath, string rationaleXml)
+    private static string? ApplyRunProperties(Run run, string? tempText, XNamespace w)
     {
-        XDocument xDocument = XDocument.Parse(rationaleXml, LoadOptions.PreserveWhitespace);
+        var runProperties = run.Descendants<RunProperties>();
+
+        foreach (var runProperty in runProperties)
+        {
+            if (runProperty.Highlight != null)
+            {
+                tempText = $"<mark>{tempText}</mark>";
+            }
+            if (runProperty.Color != null && runProperty.Color.GetAttribute("val", w.NamespaceName).Value != AppConstants.SdtColor[1..])
+            {
+                tempText = $"<span style=\"color:#{runProperty.Color.GetAttribute("val", w.NamespaceName).Value}\">{tempText}</span>";
+            }
+            if (runProperty.Underline != null)
+            {
+                tempText = $"<u>{tempText}</u>";
+            }
+            if (runProperty.Bold != null)
+            {
+                tempText = $"<strong>{tempText}</strong>";
+            }
+            if (runProperty.FontSize != null)
+            {
+                var fontSize = runProperty.FontSize.GetAttribute("val", w.NamespaceName).Value;
+                tempText = $"<span style=\"font-size:{fontSize}pt\">{tempText}</span>";
+            }
+        }
+
+        return tempText;
+    }
+
+
+    public void Generate(string docPath, string xmlString)
+    {
+        XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
         Validate(xDocument, out XElement? bodyElement);
 
         using WordprocessingDocument wordDocument = WordprocessingDocument.Create(docPath, WordprocessingDocumentType.Document);
@@ -207,9 +211,9 @@ public class DocumentGenerator
         mainPart.Document?.Save();
     }
 
-    public static byte[] Create(string rationaleXml)
+    public byte[] Generate(string xmlString)
     {
-        XDocument xDocument = XDocument.Parse(rationaleXml, LoadOptions.PreserveWhitespace);
+        XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
         Validate(xDocument, out XElement? bodyElement);
 
         using MemoryStream stream = new();
@@ -232,5 +236,14 @@ public class DocumentGenerator
 
         stream.Flush();
         return stream.ToArray();
+    }
+
+    public IList<FormData> Process(byte[] byteArray)
+    {
+        using MemoryStream stream = new(byteArray);
+        using WordprocessingDocument wordDocument = WordprocessingDocument.Open(stream, true);
+        Body? body = wordDocument.MainDocumentPart?.Document.Body;
+
+        return ExtractSdtData(body);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace Assette.Editors.InvestmentWriter;
+namespace Assette.Editors.FormGenerator;
 
 public static class AppEnums
 {

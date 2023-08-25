@@ -1,16 +1,15 @@
-using Assette.Editors.InvestmentWriter.Entities;
 using DotLiquid;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
-namespace Assette.Editors.InvestmentWriter;
+namespace Assette.Editors.FormGenerator;
 public class XmlGenerator
 {
     protected XmlGenerator()
     {
     }
 
+    /* TODO: Should be removed
     public static string Create(string templatePath)
     {
         RationaleTest rationaleTest = new();
@@ -39,6 +38,7 @@ public class XmlGenerator
 
         return result;
     }
+    */
 
     public static string Create(JObject jsonData, string templatePath)
     {
