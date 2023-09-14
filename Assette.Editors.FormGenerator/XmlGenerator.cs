@@ -42,12 +42,17 @@ public class XmlGenerator
 
     public static string Create(JObject jsonData, string templatePath)
     {
+        //var data = jsonData.ToObject<Dictionary<string, object>>();
+
         XDocument xmlTemplate = XDocument.Load(templatePath);
         string templateContent = xmlTemplate.ToString();
-        Template template = Template.Parse(templateContent);
 
-        var data = jsonData.ToObject<Dictionary<string, object>>();
-        string result = template.Render(Hash.FromAnonymousObject(new { data }));
+        Template.RegisterSafeType(typeof(JObject), new string[] { "*" });
+        Template.RegisterValueTypeTransformer(typeof(JObject), value => value.ToString());
+
+        Template template = Template.Parse(templateContent);
+        
+        string result = template.Render(Hash.FromAnonymousObject(new { data = jsonData}));
 
         return result;
     }

@@ -6,7 +6,7 @@ public record Item : ILiquidizable
 {
     public required string Title { get; init; }
     public string TitleId { get { return Guid.NewGuid().ToString(); } }
-    public string InputId { get { return Guid.NewGuid().ToString(); } }
+    public required string InputId { get; init; }
 
     public object ToLiquid()
     {

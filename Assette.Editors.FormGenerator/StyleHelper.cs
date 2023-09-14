@@ -720,6 +720,16 @@ public static class StyleHelper
         }
     }
 
+    public static void EnableTrackChanges(this MainDocumentPart mainDocPart)
+    {
+        DocumentSettingsPart settingsPart = mainDocPart.AddNewPart<DocumentSettingsPart>();
+        Settings settings = new();
+        TrackRevisions trackRevisions = new() { Val = OnOffValue.FromBoolean(true) };
+        settings.AppendChild(trackRevisions);
+        settingsPart.Settings = settings;
+        settingsPart.Settings.Save();
+    }
+
     public static void AppendSpans<T>(this T compositeElement, XElement paragraphElement, IEnumerable<XElement> spanElements)
         where T : TypedOpenXmlCompositeElement
     {

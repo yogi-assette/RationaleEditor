@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assette.Editors.FormGenerat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assette.Editors.FormGenerator.Test", "Assette.Editors.FormGenerator.Test\Assette.Editors.FormGenerator.Test.csproj", "{E14F4FD4-6E24-4796-B333-2856EC1A3059}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16980A8C-36DD-462E-8785-D07D84202531}"
+	ProjectSection(SolutionItems) = preProject
+		Requirements.md = Requirements.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -64,23 +64,6 @@ public class DocumentGenerator : IDocumentGenerator
         }
     }
 
-    private static void Build2(Body body, IEnumerable<XElement>? elements)
-    {
-        if (elements == null || !elements.Any())
-        {
-            return;
-        }
-
-        foreach (XElement element in elements)
-        {
-            IEnumerable<XElement> descendants = element.DescendantsAndSelf().Distinct();
-
-            BuildControl(body, element);
-            Build2(body, descendants);
-        }
-    }
-
-
     private static void Build(Body body, IEnumerable<XElement>? elements, HashSet<string> processedIds)
     {
         if (elements == null || !elements.Any())
@@ -147,7 +130,7 @@ public class DocumentGenerator : IDocumentGenerator
                 }
             }
 
-            if (lines.Count > 0)
+            if (lines.Count > 0 && !(lines.Count == 1 && lines[0] ==  AppConstants.SdtText))
             {
                 data.Value = $"<p>{string.Join("<br/>", lines)}</p>";
                 sectorData.Add(data);
@@ -220,6 +203,7 @@ public class DocumentGenerator : IDocumentGenerator
         using WordprocessingDocument wordDocument = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document);
         MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
         mainPart.AddStylesPartToPackage();
+        mainPart.EnableTrackChanges();
 
         Body body = new();
         HashSet<string> processedIds = new();
@@ -236,6 +220,11 @@ public class DocumentGenerator : IDocumentGenerator
 
         stream.Flush();
         return stream.ToArray();
+    }
+
+    public byte[] Generate(IList<FormData> data, string xmlString)
+    {
+        return null;
     }
 
     public IList<FormData> Process(byte[] byteArray)

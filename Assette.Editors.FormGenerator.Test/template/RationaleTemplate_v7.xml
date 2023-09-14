@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document version='1.0.0'>
 	<body>
+		key: {{ data.UniqueId | inspect }}
+		key: {{ data.TitleId | inspect }}
+		key: {{ data["Title"] | inspect }}
+		key : {{ data | inspect }}
 		<h1 id='{{ data.TitleId }}' style='font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;'>{{ data.Title }}</h1>
 		<h2 id='{{ data.CategoryTitleId }}' style='margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;'>{{ data.CategoryTitle }}</h2>
 		<div id='div-1'>
@@ -8,7 +12,7 @@
 			<input id='{{ data.Overview.InputId }}' style='table-cell-width:width = 9124,type = Dxa'></input>
 		</div>
 		<div id='div-2'>
-			{% for subCategory in data["SubCategories"] %}
+			{% for subCategory in data.SubCategories %}
 			<table id='table-{{ subCategory.TitleId }}' style='table-style:val=TableGrid;table-grid:width = 9090;table-width:width = 0, type = Auto;table-indentation:width = 90, type = Dxa;table-border:val = none, color = auto, size = 0, space = 0; shading:val=clear,color=auto,fill=C2D72B;table-look:val=04A0,first-row=true,last-row=false,first-column=true,last-column=false,no-horizontal-band=false,no-vertical-band=true;'>
 				<tr id='table-row-{{ subCategory.TitleId }}' style='table-row-height:648'>
 					<td id='table-row-td-{{ subCategory.TitleId }}' style='table-cell-width:width = 9090, type= Dxa;shading:val=clear,color=auto,fill=#C2D72B;table-cell-vertical-alignment:center'>
@@ -22,7 +26,7 @@
 				</tr>
 			</table>
 			<div id='div-4'>
-				<h2 id='{{ subCategory.Section.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-weight:bold;'>{{ subCategory["Section"]["Title"] }}</h2>
+				<h2 id='{{ subCategory.Section.TitleId }}' style='font-size:16.0pt;color:#707070;letter-spacing:.75pt;font-weight:bold;'>{{ subCategory.Section.Title }}</h2>
 				<input id='{{ subCategory.Section.InputId }}' style='table-cell-width:width = 9124,type = Dxa'></input>
 			</div>
 
