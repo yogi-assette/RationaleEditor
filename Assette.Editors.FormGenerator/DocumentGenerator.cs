@@ -3,6 +3,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Text;
 using System.Xml.Linq;
+using System.Security.Cryptography;
 
 namespace Assette.Editors.FormGenerator;
 
@@ -26,7 +27,7 @@ public class DocumentGenerator : IDocumentGenerator
         }
     }
 
-    private static void BuildControl(Body body, XElement element)
+    private static void BuildControl(IList<FormData> formData, Body body, XElement element)
     {
         switch (element.Name.LocalName)
         {
@@ -53,7 +54,7 @@ public class DocumentGenerator : IDocumentGenerator
                 body.AppendParagraph(element, AppEnums.ElementType.Span);
                 break;
             case "input":
-                body.AppendSdtBlockWithTable(element);
+                body.AppendSdtBlockWithTable(element, formData);
                 body.AppendBlankLine();
                 break;
             case "table":
@@ -64,7 +65,7 @@ public class DocumentGenerator : IDocumentGenerator
         }
     }
 
-    private static void Build(Body body, IEnumerable<XElement>? elements, HashSet<string> processedIds)
+    private static void Build(IList<FormData> formData, Body body, IEnumerable<XElement>? elements, HashSet<string> processedIds)
     {
         if (elements == null || !elements.Any())
         {
@@ -84,14 +85,67 @@ public class DocumentGenerator : IDocumentGenerator
 
             IEnumerable<XElement> descendants = element.Descendants();
 
-            BuildControl(body, element);
+            BuildControl(formData, body, element);
             if (elementId != null)
             {
                 processedIds.Add(elementId);
             }
-            Build(body, descendants, processedIds);
+            Build(formData, body, descendants, processedIds);
         }
     }
+
+    private static string RemoveIdAttributeValues(string xmlString)
+    {
+        XDocument xdoc = XDocument.Parse(xmlString);
+
+        foreach (XElement element in xdoc.Descendants())
+        {
+            if (element.Attribute("id") != null)
+            {
+                element.Attribute("id").Value = string.Empty;
+            }
+        }
+
+        return xdoc.ToString();
+    }
+
+    private static string GenerateHashedString(string xmlString)
+    {
+        byte[] xmlStringBytes = Encoding.ASCII.GetBytes(RemoveIdAttributeValues(xmlString));
+        using var md5 = MD5.Create();
+        byte[] xmlByteArrayHashed = md5.ComputeHash(xmlStringBytes);
+        string xmlStringHashed = BitConverter.ToString(xmlByteArrayHashed).Replace("-", string.Empty);
+
+        return xmlStringHashed;
+    }
+
+    private IList<FormData> GenerateFormData(IList<FormData> savedFormData, string xmlString)
+    {
+        XDocument xdoc = XDocument.Parse(xmlString);
+        IList<FormData> inputFormData = new List<FormData>();
+        Paragraph paragraph = StyleHelper.CreateSdtBlockParagraph();
+
+        foreach (XElement element in xdoc.Descendants("input"))
+        {
+            var idValue = element.Attribute("id")?.Value;
+
+            if (idValue != null)
+            {
+                var savedFormDataValue = savedFormData.FirstOrDefault(x => x.Id == idValue);
+                var formDataParagraphs = savedFormDataValue?.Paragraphs ?? new List<Paragraph> { paragraph };
+
+                inputFormData.Add(new FormData
+                {
+                    Id = idValue,
+                    Name = idValue,
+                    Paragraphs = formDataParagraphs
+                });
+            }
+        }
+
+        return inputFormData;
+    }
+
 
     private static IList<FormData> ExtractSdtData(Body? body)
     {
@@ -99,6 +153,7 @@ public class DocumentGenerator : IDocumentGenerator
         var sdts = body?.Descendants<SdtElement>() ?? new List<SdtElement>();
         XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 
+        // Yogi: Assumption is each SdtElement has only one SdtContentBlock
         foreach (var sdt in sdts)
         {
             FormData data = new();
@@ -110,9 +165,11 @@ public class DocumentGenerator : IDocumentGenerator
             List<string?> lines = new();
             var sdtContentBlocks = sdt.Descendants<SdtContentBlock>();
 
+            // Yogi: This FormData logic works for single SdtContentBlock 
             foreach (var sdtContentBlock in sdtContentBlocks)
             {
                 var paragraphs = sdtContentBlock.Descendants<Paragraph>();
+                data.Paragraphs = paragraphs;
 
                 foreach (var paragraph in paragraphs)
                 {
@@ -130,7 +187,7 @@ public class DocumentGenerator : IDocumentGenerator
                 }
             }
 
-            if (lines.Count > 0 && !(lines.Count == 1 && lines[0] ==  AppConstants.SdtText))
+            if (lines.Count > 0 && !(lines.Count == 1 && lines[0] == AppConstants.SdtText))
             {
                 data.Value = $"<p>{string.Join("<br/>", lines)}</p>";
                 sectorData.Add(data);
@@ -185,7 +242,7 @@ public class DocumentGenerator : IDocumentGenerator
         Body body = new();
         HashSet<string> processedIds = new();
 
-        Build(body, bodyElement?.Elements(), processedIds);
+        Build(new List<FormData>(), body, bodyElement?.Elements(), processedIds);
 
         Document document = new();
         document.AddNamespaces();
@@ -196,11 +253,20 @@ public class DocumentGenerator : IDocumentGenerator
 
     public byte[] Generate(string xmlString)
     {
+        var formData = GenerateFormData(new List<FormData>(), xmlString);
+        return Generate(formData, xmlString);
+
+        /* TODO: This code has to be removed after testing
+
         XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
         Validate(xDocument, out XElement? bodyElement);
 
         using MemoryStream stream = new();
         using WordprocessingDocument wordDocument = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document);
+
+        string xmlStringHashed = GenerateHashedString(xmlString);
+        wordDocument.SetCustomFileProperties(xmlStringHashed);
+
         MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
         mainPart.AddStylesPartToPackage();
         mainPart.EnableTrackChanges();
@@ -220,19 +286,69 @@ public class DocumentGenerator : IDocumentGenerator
 
         stream.Flush();
         return stream.ToArray();
+        */
     }
 
-    public byte[] Generate(IList<FormData> data, string xmlString)
+    private byte[] Generate(IList<FormData> formData, string xmlString , IEnumerable<Comment>? comments = null)
     {
-        return null;
+        XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
+        Validate(xDocument, out XElement? bodyElement);
+
+        using MemoryStream stream = new();
+        using WordprocessingDocument wordDocument = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document);
+
+        string xmlStringHashed = GenerateHashedString(xmlString);
+        wordDocument.SetCustomFileProperties(xmlStringHashed);
+
+        MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+        mainPart.AddStylesPartToPackage();
+        mainPart.EnableTrackChanges();
+
+        Body body = new();
+        HashSet<string> processedIds = new();
+
+        Build(formData, body, bodyElement?.Elements(), processedIds);
+
+        Document document = new();
+        document.AddNamespaces();
+        document?.AppendChild(body);
+        mainPart.Document = document ?? new Document();
+        mainPart.AddCommentsPart(comments);
+        mainPart.Document?.Save();
+
+        wordDocument.Dispose();
+
+        stream.Flush();
+        return stream.ToArray();
     }
 
-    public IList<FormData> Process(byte[] byteArray)
+    public byte[] ProcessContent(byte[] byteArray, string xmlString, out IList<FormData> formData)
     {
-        using MemoryStream stream = new(byteArray);
+        byte[] clonedByteArray = (byte[])byteArray.Clone();
+
+        formData = new List<FormData>();
+
+        using MemoryStream stream = new(clonedByteArray);
         using WordprocessingDocument wordDocument = WordprocessingDocument.Open(stream, true);
-        Body? body = wordDocument.MainDocumentPart?.Document.Body;
+        wordDocument.GetCustomFileProperties(out string dataModelValue);
 
-        return ExtractSdtData(body);
+        if (dataModelValue != GenerateHashedString(xmlString))
+        {
+            // Extract the comments from the word document
+            WordprocessingCommentsPart? commentsPart = wordDocument.MainDocumentPart?.WordprocessingCommentsPart;
+            var comments = commentsPart?.Comments.Elements<Comment>();
+
+
+            Body? body = wordDocument.MainDocumentPart?.Document.Body;
+            IList<FormData> savedFormData = ExtractSdtData(body);
+
+            // Get the input ids from the xmlString
+            formData = GenerateFormData(savedFormData, xmlString);
+
+            return Generate(formData, xmlString, comments);
+        }
+
+        return byteArray;
     }
+
 }

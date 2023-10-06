@@ -241,7 +241,7 @@ public class RationaleStructure1
 
     private readonly Rationale rationale = new()
     {
-        UniqueId = new Rationale().GenerateGuid(),
+        UniqueId = "rationale-uid",
         Version = "1.0.0",
         Title = "Rationale for Large Cap Value | Equities",
         CategoryTitle = "Sector Attribution",

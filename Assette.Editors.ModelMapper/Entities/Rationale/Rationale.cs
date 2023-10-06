@@ -4,24 +4,24 @@ namespace Assette.Editors.ModelMapper.Entities.Rationale;
 
 public readonly record struct Rationale : ILiquidizable
 {
-    private readonly HashSet<Guid> _generatedGuids;
+    //private readonly HashSet<Guid> _generatedGuids;
 
     public Rationale()
     {
-        _generatedGuids = new HashSet<Guid>();
+        //_generatedGuids = new HashSet<Guid>();
     }
 
-    public string GenerateGuid()
-    {
-        Guid guid = Guid.NewGuid();
-        while (_generatedGuids.Contains(guid))
-        {
-            guid = Guid.NewGuid();
-        }
-        _generatedGuids.Add(guid);
+    //public string GenerateGuid()
+    //{
+    //    Guid guid = Guid.NewGuid();
+    //    while (_generatedGuids.Contains(guid))
+    //    {
+    //        guid = Guid.NewGuid();
+    //    }
+    //    _generatedGuids.Add(guid);
 
-        return guid.ToString();
-    }
+    //    return guid.ToString();
+    //}
 
     public string UniqueId { get; init; }
     public string Version { get; init; }

@@ -40,10 +40,8 @@ public class XmlGenerator
     }
     */
 
-    public static string Create(JObject jsonData, string templatePath)
+    public static string Create(JObject data, string templatePath)
     {
-        //var data = jsonData.ToObject<Dictionary<string, object>>();
-
         XDocument xmlTemplate = XDocument.Load(templatePath);
         string templateContent = xmlTemplate.ToString();
 
@@ -52,7 +50,7 @@ public class XmlGenerator
 
         Template template = Template.Parse(templateContent);
         
-        string result = template.Render(Hash.FromAnonymousObject(new { data = jsonData}));
+        string result = template.Render(Hash.FromAnonymousObject(new { data = data}));
 
         return result;
     }

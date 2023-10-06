@@ -4,5 +4,5 @@ public interface IDocumentGenerator
 {
     void Generate(string docPath, string xmlString);
     byte[] Generate(string xmlString);
-    IList<FormData> Process(byte[] byteArray);
+    byte[] ProcessContent(byte[] byteArray, string xmlString, out IList<FormData> formData);
 }

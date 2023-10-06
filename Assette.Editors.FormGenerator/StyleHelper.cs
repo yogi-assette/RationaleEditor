@@ -5,6 +5,9 @@ using System.Xml.Linq;
 using W15 = DocumentFormat.OpenXml.Office2013.Word;
 using static Assette.Editors.FormGenerator.AppEnums;
 using Assette.Editors.FormGenerator;
+using DocumentFormat.OpenXml.CustomProperties;
+using DocumentFormat.OpenXml.VariantTypes;
+using System.Collections.Generic;
 
 namespace Assette.Editors.FormGenerator;
 public static class StyleHelper
@@ -131,31 +134,8 @@ public static class StyleHelper
         return table;
     }
 
-    private static SdtBlock CreateSdtBlock(string? id)
+    public static Paragraph CreateSdtBlockParagraph()
     {
-        RunProperties sdtRunProperties = SdtRunProperties;
-
-        SdtPlaceholder sdtPlaceholder = new();
-        _ = sdtPlaceholder.AppendChild(new DocPartReference() { Val = "F8390F70C0CF4898A2F84F0C9C097B51" });
-
-        SdtProperties sdtProperties = new();
-        _ = sdtProperties.AppendChild(sdtRunProperties);
-        _ = sdtProperties.AppendChild(new SdtId() { Val = 1676146547 });
-        _ = sdtProperties.AppendChild(new Tag() { Val = id });
-        _ = sdtProperties.AppendChild(new Lock() { Val = LockingValues.SdtLocked });
-        _ = sdtProperties.AppendChild(sdtPlaceholder);
-        _ = sdtProperties.AppendChild(new ShowingPlaceholder());
-        _ = sdtProperties.AppendChild(new W15.Color { Val = "FFCC99" });
-
-        ParagraphMarkRunProperties paragraphMarkRunProperties = new();
-        _ = paragraphMarkRunProperties.AppendChild(new RunFonts() { EastAsiaTheme = ThemeFontValues.MinorEastAsia, ComplexScriptTheme = ThemeFontValues.MinorHighAnsi });
-        _ = paragraphMarkRunProperties.AppendChild(new Color() { Val = AppConstants.SdtColor, ThemeColor = ThemeColorValues.Background2, ThemeShade = "40" });
-        _ = paragraphMarkRunProperties.AppendChild(new Spacing() { Val = 15 });
-
-        ParagraphProperties paragraphProperties = new();
-        _ = paragraphProperties.AppendChild(new SpacingBetweenLines() { Line = "312", LineRule = LineSpacingRuleValues.Auto });
-        _ = paragraphProperties.AppendChild(paragraphMarkRunProperties);
-
         RunStyle runStyle = new() { Val = "PlaceholderText" };
         RunProperties runProperties = new();
         _ = runProperties.AppendChild(runStyle);
@@ -174,11 +154,85 @@ public static class StyleHelper
             TextId = "61DBF2A9"
         };
 
+        ParagraphMarkRunProperties paragraphMarkRunProperties = new();
+        _ = paragraphMarkRunProperties.AppendChild(new RunFonts() { EastAsiaTheme = ThemeFontValues.MinorEastAsia, ComplexScriptTheme = ThemeFontValues.MinorHighAnsi });
+        _ = paragraphMarkRunProperties.AppendChild(new Color() { Val = AppConstants.SdtColor, ThemeColor = ThemeColorValues.Background2, ThemeShade = "40" });
+        _ = paragraphMarkRunProperties.AppendChild(new Spacing() { Val = 15 });
+
+        ParagraphProperties paragraphProperties = new();
+        _ = paragraphProperties.AppendChild(new SpacingBetweenLines() { Line = "312", LineRule = LineSpacingRuleValues.Auto });
+        _ = paragraphProperties.AppendChild(paragraphMarkRunProperties);
+
         _ = paragraph.AppendChild(paragraphProperties);
         _ = paragraph.AppendChild(run);
 
+        return paragraph;
+    }
+
+    private static SdtBlock CreateSdtBlock(string? id, IList<FormData>? formData = null)
+    {
+        RunProperties sdtRunProperties = SdtRunProperties;
+
+        SdtPlaceholder sdtPlaceholder = new();
+        _ = sdtPlaceholder.AppendChild(new DocPartReference() { Val = "F8390F70C0CF4898A2F84F0C9C097B51" });
+
+        SdtProperties sdtProperties = new();
+        _ = sdtProperties.AppendChild(sdtRunProperties);
+        _ = sdtProperties.AppendChild(new SdtId() { Val = 1676146547 });
+        _ = sdtProperties.AppendChild(new Tag() { Val = id });
+        _ = sdtProperties.AppendChild(new Lock() { Val = LockingValues.SdtLocked });
+        _ = sdtProperties.AppendChild(sdtPlaceholder);
+        _ = sdtProperties.AppendChild(new ShowingPlaceholder());
+        _ = sdtProperties.AppendChild(new W15.Color { Val = "FFCC99" });
+
+        //RunStyle runStyle = new() { Val = "PlaceholderText" };
+        //RunProperties runProperties = new();
+        //_ = runProperties.AppendChild(runStyle);
+
+        //Run run = new() { RsidRunProperties = "00D7472F" };
+        //_ = run.AppendChild(runProperties);
+        //_ = run.AppendChild(new Text(AppConstants.SdtText));
+
+        //Paragraph paragraph = new()
+        //{
+        //    RsidParagraphMarkRevision = "00D7472F",
+        //    RsidParagraphAddition = "009734FA",
+        //    RsidParagraphProperties = "00237F85",
+        //    RsidRunAdditionDefault = "00D7472F",
+        //    ParagraphId = "2F9F5118",
+        //    TextId = "61DBF2A9"
+        //};
+
+        //ParagraphMarkRunProperties paragraphMarkRunProperties = new();
+        //_ = paragraphMarkRunProperties.AppendChild(new RunFonts() { EastAsiaTheme = ThemeFontValues.MinorEastAsia, ComplexScriptTheme = ThemeFontValues.MinorHighAnsi });
+        //_ = paragraphMarkRunProperties.AppendChild(new Color() { Val = AppConstants.SdtColor, ThemeColor = ThemeColorValues.Background2, ThemeShade = "40" });
+        //_ = paragraphMarkRunProperties.AppendChild(new Spacing() { Val = 15 });
+
+        //ParagraphProperties paragraphProperties = new();
+        //_ = paragraphProperties.AppendChild(new SpacingBetweenLines() { Line = "312", LineRule = LineSpacingRuleValues.Auto });
+        //_ = paragraphProperties.AppendChild(paragraphMarkRunProperties);
+
+        //_ = paragraph.AppendChild(paragraphProperties);
+        //_ = paragraph.AppendChild(run);
+
+
+
         SdtContentBlock sdtContentBlock = new();
-        _ = sdtContentBlock.AppendChild(paragraph);
+
+        IEnumerable<Paragraph>? paragraphs = formData?.FirstOrDefault(x => x.Id == id)?.Paragraphs;
+
+        if (paragraphs == null || !paragraphs.Any())
+        {
+            Paragraph paragraph = CreateSdtBlockParagraph();
+            _ = sdtContentBlock.AppendChild(paragraph);
+        }
+        else
+        {
+            foreach (Paragraph para in paragraphs ?? new List<Paragraph>())
+            {
+                _ = sdtContentBlock?.AppendChild(para.CloneNode(true));
+            }
+        }
 
         SdtBlock sdtBlock = new();
         _ = sdtBlock.AppendChild(sdtProperties);
@@ -720,6 +774,25 @@ public static class StyleHelper
         }
     }
 
+    public static void AddCommentsPart(this MainDocumentPart mainPart, IEnumerable<Comment>? comments)
+    {
+        if (mainPart == null || comments == null || !comments.Any())
+            return;
+
+        if (mainPart.WordprocessingCommentsPart == null)
+        {
+            var commentsPart = mainPart.AddNewPart<WordprocessingCommentsPart>();
+            commentsPart.Comments = new Comments();
+        }
+
+        foreach (Comment comment in comments)
+        {
+            mainPart.WordprocessingCommentsPart?.Comments.AppendChild(comment.CloneNode(true));
+        }
+
+        mainPart.WordprocessingCommentsPart?.Comments.Save();
+    }
+
     public static void EnableTrackChanges(this MainDocumentPart mainDocPart)
     {
         DocumentSettingsPart settingsPart = mainDocPart.AddNewPart<DocumentSettingsPart>();
@@ -814,20 +887,21 @@ public static class StyleHelper
         compositeElement.AppendChild(paragraph);
     }
 
+    // TODO [yogi]: Remove if not used
     public static void AppendSdtBlock(this Body body, string? id)
     {
         SdtBlock sdtBlock = CreateSdtBlock(id);
         body?.AppendChild(sdtBlock);
     }
 
-    public static void AppendSdtBlockWithTable(this Body body, XElement element)
+    public static void AppendSdtBlockWithTable(this Body body, XElement element, IList<FormData> formData)
     {
         string? id = element.Attribute("id")?.Value;
 
         string? styles = element.Attribute("style")?.Value;
-        
 
-        SdtBlock sdtBlock = CreateSdtBlock(id);
+
+        SdtBlock sdtBlock = CreateSdtBlock(id, formData);
 
         var styleNameValuePairs = ExtractStyles(styles, ElementType.Input, PropertiesType.TableCellProperties);
         TableCell tableCell = CreateTableCell(styleNameValuePairs);
@@ -907,5 +981,48 @@ public static class StyleHelper
         tableRows.ForEach(row => table.AppendChild(row));
 
         compositeElement.AppendChild(table);
+    }
+
+    public static void SetCustomFileProperties(this WordprocessingDocument wordDocument, string propValue)
+    {
+        var verProp = new CustomDocumentProperty
+        {
+            FormatId = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}",
+            Name = "xml_string",
+            VTLPWSTR = new VTLPWSTR(propValue)
+        };
+
+        CustomFilePropertiesPart? customFileProps = wordDocument.CustomFilePropertiesPart;
+        if (customFileProps == null)
+        {
+            customFileProps = wordDocument.AddCustomFilePropertiesPart();
+            customFileProps.Properties = new Properties();
+        }
+        customFileProps.Properties.AppendChild(verProp);
+        int pid = 2;
+        foreach (CustomDocumentProperty prop in customFileProps.Properties.OfType<CustomDocumentProperty>())
+        {
+            prop.PropertyId = pid++;
+        }
+        customFileProps.Properties.Save();
+    }
+
+    public static void GetCustomFileProperties(this WordprocessingDocument wordDocument, out string propValue)
+    {
+        propValue = string.Empty;
+        CustomFilePropertiesPart? customFileProps = wordDocument.CustomFilePropertiesPart;
+        if (customFileProps == null)
+        {
+            return;
+        }
+
+        foreach (CustomDocumentProperty prop in customFileProps.Properties.OfType<CustomDocumentProperty>())
+        {
+            if (prop.Name == "xml_string")
+            {
+                propValue = prop.VTLPWSTR.Text;
+                break;
+            }
+        }
     }
 }

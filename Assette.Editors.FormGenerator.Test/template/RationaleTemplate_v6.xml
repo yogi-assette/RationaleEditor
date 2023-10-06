@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document version='1.0.0'>
 	<body>
+		<!--key: {{ data.UniqueId | inspect }}-->
+		<!--key: {{ data["Title"] | inspect }}-->
+		<!--key: {{ data.TitleId | inspect }}-->
+		<!--key : {{ data | inspect }}-->
 		<h1 id='{{ rationale.TitleId }}' style='font-family:Calibri;font-size:28pt;color:#707070;font-weight:bold;'>{{ rationale.Title }}</h1>
 		<h2 id='{{ rationale.CategoryTitleId }}' style='margin-top:12pt;font-size:20pt;color:#A5B82A;letter-spacing:.75pt;font-family:Calibri;font-weight: bold;'>{{ rationale.CategoryTitle }}</h2>
 		<div id='div-1'>

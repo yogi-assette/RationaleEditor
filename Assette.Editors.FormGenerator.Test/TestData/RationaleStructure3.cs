@@ -2,7 +2,7 @@
 
 namespace Assette.Editors.FormGenerator.Test.TestData;
 
-public class RationaleStructure2
+public class RationaleStructure3
 {
     public Rationale Get
     {
@@ -58,12 +58,6 @@ public class RationaleStructure2
                                         },
                                         new SecurityAttributionWithRank
                                         {
-                                            Title = "Microsoft Corp.",
-                                            Ranks = new List<int> { 2 },
-                                            InputId = "microsoft-corp1",
-                                        },
-                                        new SecurityAttributionWithRank
-                                        {
                                             Title = "IBM",
                                             Ranks = new List<int> { 3 },
                                             InputId = "ibm",
@@ -73,9 +67,9 @@ public class RationaleStructure2
                             },
                             new SectorAttributionWithRank
                             {
-                                Title = "Consumer Discretionary",
+                                Title = "Consumer Discretionary Updated",
                                 Ranks = new List<int> { 4 },
-                                InputId = "consumer-discretionary1",
+                                InputId = "consumer-discretionary-updated1",
                                TopSecurity = new TopSecurity
                                {
                                     Title = "Top 3 Securities (3)",
@@ -89,9 +83,9 @@ public class RationaleStructure2
                                         },
                                         new SecurityAttributionWithRank
                                         {
-                                            Title = "Home Depot Inc.",
+                                            Title = "Home Depot Inc.- updated",
                                             Ranks = new List<int> { 2 },
-                                            InputId = "home-depot-inc1",
+                                            InputId = "home-depot-inc-updated1",
                                         },
                                         new SecurityAttributionWithRank
                                         {
@@ -362,6 +356,88 @@ public class RationaleStructure2
                                             Title = "Facebook Inc.",
                                             Ranks = new List<int> { 2 },
                                             InputId = "facebook-inc3",
+                                        },
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new TopAttribution
+                    {
+                        Title = "Top 5 Relative Detractors (3) - updated",
+                        SectorAttributionWithRanks = new List<SectorAttributionWithRank>
+                        {
+                            new SectorAttributionWithRank
+                            {
+                                Title = "Financials-updated",
+                                Ranks = new List<int> { 1 },
+                                InputId = "financials - updated4",
+                                TopSecurity = new TopSecurity
+                                {
+                                    Title = "Top 3 Securities (3)",
+                                    SecurityAttributionWithRanks = new List<SecurityAttributionWithRank>
+                                    {
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "Berkshire Hathaway Inc.",
+                                            Ranks = new List<int> { 1 },
+                                            InputId = "berkshire-hathaway-inc-updated4"
+                                        },
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "JPMorgan Chase &amp; Co.",
+                                            Ranks = new List<int> { 2 },
+                                            InputId = "jpmorgan-chase-co-updated4"
+                                        },
+                                    }
+                                }
+                            },
+                            new SectorAttributionWithRank
+                            {
+                                Title = "Energy-updated",
+                                Ranks = new List<int> { 2 },
+                                InputId = "energy-updated3",
+                                TopSecurity = new TopSecurity
+                                {
+                                    Title = "Top 3 Securities (3)-updated",
+                                    SecurityAttributionWithRanks = new List<SecurityAttributionWithRank>
+                                    {
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "Exxon Mobil Corp.-updated4",
+                                            Ranks = new List<int> { 1 },
+                                            InputId = "exxon-mobil-corp-updated3"
+                                        },
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "Chevron Corp.-updated4",
+                                            Ranks = new List<int> { 2 },
+                                            InputId = "chevron-corp-updated3"
+                                        },
+                                    }
+                                }
+                            },
+                            new SectorAttributionWithRank
+                            {
+                                Title = "Communication Services-updated",
+                                Ranks = new List<int> { 3 },
+                                InputId = "communication-services-updated3",
+                               TopSecurity = new TopSecurity
+                               {
+                                    Title = "Top 3 Securities (3)-updated",
+                                    SecurityAttributionWithRanks = new List<SecurityAttributionWithRank>
+                                    {
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "Alphabet Inc.-updated",
+                                            Ranks = new List<int> { 1 },
+                                            InputId = "alphabet-inc-updated3"
+                                        },
+                                        new SecurityAttributionWithRank
+                                        {
+                                            Title = "Facebook Inc.-updated",
+                                            Ranks = new List<int> { 2 },
+                                            InputId = "facebook-inc-updated3",
                                         },
                                     }
                                 }
