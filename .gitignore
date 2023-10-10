@@ -22,6 +22,7 @@ obj/
 # Logs and debugging data
 *.log
 *.vspscc
+*.docx
 
 # Rider files
 .idea/
@@ -63,3 +64,4 @@ ehthumbs.db
 # Archive files
 _archive/
 *.csv
+doc/
