@@ -4,6 +4,8 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System.Text;
 using System.Xml.Linq;
 using System.Security.Cryptography;
+using System.Security;
+using System.Xml;
 
 namespace Assette.Editors.Forms;
 
@@ -230,7 +232,7 @@ public class DocumentGenerator : IDocumentGenerator
     }
 
 
-    public void Generate(string docPath, string xmlString)
+    public void GenerateByDocPath(string docPath, string xmlString)
     {
         XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
         Validate(xDocument, out XElement? bodyElement);
@@ -289,7 +291,35 @@ public class DocumentGenerator : IDocumentGenerator
         */
     }
 
-    private byte[] Generate(IList<FormData> formData, string xmlString , IEnumerable<Comment>? comments = null)
+    public byte[] Generate(string id, string xmlString)
+    {
+        //This code will be called from content service
+        byte[] byteArray = File.ReadAllBytes($"./doc/{id}.docx");
+
+
+        byte[] clonedByteArray = (byte[])byteArray.Clone();
+
+        using MemoryStream stream = new(clonedByteArray);
+        using WordprocessingDocument wordDocument = WordprocessingDocument.Open(stream, true);
+        wordDocument.GetCustomFileProperties(out string? dataModelValue);
+
+        if (!string.IsNullOrWhiteSpace(dataModelValue) && dataModelValue == GenerateHashedString(xmlString))
+            return byteArray;
+
+        // Extract the comments from the word document
+        WordprocessingCommentsPart? commentsPart = wordDocument.MainDocumentPart?.WordprocessingCommentsPart;
+        var comments = commentsPart?.Comments.Elements<Comment>();
+
+        Body? body = wordDocument.MainDocumentPart?.Document.Body;
+        IList<FormData> savedFormData = ExtractSdtData(body);
+
+        // Get the input ids from the xmlString
+        IList<FormData> formData = GenerateFormData(savedFormData, xmlString);
+
+        return Generate(formData, xmlString, comments);
+    }
+
+    private byte[] Generate(IList<FormData> formData, string xmlString, IEnumerable<Comment>? comments = null)
     {
         XDocument xDocument = XDocument.Parse(xmlString, LoadOptions.PreserveWhitespace);
         Validate(xDocument, out XElement? bodyElement);
@@ -330,25 +360,23 @@ public class DocumentGenerator : IDocumentGenerator
 
         using MemoryStream stream = new(clonedByteArray);
         using WordprocessingDocument wordDocument = WordprocessingDocument.Open(stream, true);
-        wordDocument.GetCustomFileProperties(out string dataModelValue);
+        wordDocument.GetCustomFileProperties(out string? dataModelValue);
 
-        if (dataModelValue != GenerateHashedString(xmlString))
-        {
-            // Extract the comments from the word document
-            WordprocessingCommentsPart? commentsPart = wordDocument.MainDocumentPart?.WordprocessingCommentsPart;
-            var comments = commentsPart?.Comments.Elements<Comment>();
+        if (!string.IsNullOrWhiteSpace(dataModelValue) && dataModelValue == GenerateHashedString(xmlString))
+            return byteArray;
+
+        // Extract the comments from the word document
+        WordprocessingCommentsPart? commentsPart = wordDocument.MainDocumentPart?.WordprocessingCommentsPart;
+        var comments = commentsPart?.Comments.Elements<Comment>();
 
 
-            Body? body = wordDocument.MainDocumentPart?.Document.Body;
-            IList<FormData> savedFormData = ExtractSdtData(body);
+        Body? body = wordDocument.MainDocumentPart?.Document.Body;
+        IList<FormData> savedFormData = ExtractSdtData(body);
 
-            // Get the input ids from the xmlString
-            formData = GenerateFormData(savedFormData, xmlString);
+        // Get the input ids from the xmlString
+        formData = GenerateFormData(savedFormData, xmlString);
 
-            return Generate(formData, xmlString, comments);
-        }
-
-        return byteArray;
+        return Generate(formData, xmlString, comments);
     }
 
 }

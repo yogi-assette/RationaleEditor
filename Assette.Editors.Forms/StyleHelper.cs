@@ -1007,7 +1007,7 @@ public static class StyleHelper
         customFileProps.Properties.Save();
     }
 
-    public static void GetCustomFileProperties(this WordprocessingDocument wordDocument, out string propValue)
+    public static void GetCustomFileProperties(this WordprocessingDocument wordDocument, out string? propValue)
     {
         propValue = string.Empty;
         CustomFilePropertiesPart? customFileProps = wordDocument.CustomFilePropertiesPart;
@@ -1020,7 +1020,7 @@ public static class StyleHelper
         {
             if (prop.Name == "xml_string")
             {
-                propValue = prop.VTLPWSTR.Text;
+                propValue = prop.VTLPWSTR?.Text;
                 break;
             }
         }

@@ -1,5 +1,7 @@
 ﻿
 using Assette.Editors.Forms.Mapper.Entities.Rationale;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace Assette.Editors.Forms.Mapper.Converters;
 
@@ -12,8 +14,8 @@ public class RationaleConverter
             { "UniqueId", rationale.UniqueId },
             { "Version", rationale.Version },
             { "TitleId", rationale.TitleId },
-            { "Title", rationale.Title },
-            { "CategoryTitle", rationale.CategoryTitle },
+            { "Title", ReplaceEscapeCharacters( rationale.Title) },
+            { "CategoryTitle", ReplaceEscapeCharacters(rationale.CategoryTitle) },
             { "CategoryTitleId", rationale.CategoryTitleId },
             { "Overview", SectorAttributionToDictionary( rationale.Overview )},
             { "SubCategories", SubCategoriesToDictionary( rationale.SubCategories )}
@@ -31,7 +33,7 @@ public class RationaleConverter
             Dictionary<string, object> subCategoryDictionary = new()
             {
                 { "TitleId", subCategory.TitleId },
-                { "Title", subCategory.Title },
+                { "Title", ReplaceEscapeCharacters(subCategory.Title) },
                 { "Section", SectorAttributionToDictionary( subCategory.Section )},
                 { "TopAttributions", TopAttributionToDictionary( subCategory.TopAttributions )}
             };
@@ -46,7 +48,7 @@ public class RationaleConverter
     {
         Dictionary<string, object> result = new()
         {
-            { "Title", sectorAttribution.Title },
+            { "Title", ReplaceEscapeCharacters( sectorAttribution.Title) },
             { "TitleId", sectorAttribution.TitleId },
             { "InputId", sectorAttribution.InputId }
         };
@@ -63,7 +65,7 @@ public class RationaleConverter
             result.Add(new Dictionary<string, object>
             {
                 { "TitleId", topAttribution.TitleId },
-                { "Title", topAttribution.Title },
+                { "Title", ReplaceEscapeCharacters( topAttribution.Title) },
                 { "SectorAttributionWithRanks", SectorAttributionWithRankToDictionary(topAttribution.SectorAttributionWithRanks )}
             });
         }
@@ -80,7 +82,7 @@ public class RationaleConverter
             result.Add(new Dictionary<string, object>
             {
                 { "TitleId", sectorAttributionWithRank.TitleId },
-                { "Title", sectorAttributionWithRank.Title },
+                { "Title", ReplaceEscapeCharacters(sectorAttributionWithRank.Title) },
                 { "InputId", sectorAttributionWithRank.InputId },
                 { "RankId", sectorAttributionWithRank.RankId },
                 { "Ranks", sectorAttributionWithRank.Ranks },
@@ -96,7 +98,7 @@ public class RationaleConverter
         Dictionary<string, object> result = new()
         {
             { "TitleId", topSecurity.TitleId },
-            { "Title", topSecurity.Title },
+            { "Title", ReplaceEscapeCharacters(topSecurity.Title) },
             { "SecurityAttributionWithRanks", SecurityAttributionWithRankToDictionary(topSecurity.SecurityAttributionWithRanks )}
         };
 
@@ -112,7 +114,7 @@ public class RationaleConverter
             result.Add(new Dictionary<string, object>
             {
                 { "TitleId", securityAttributionWithRank.TitleId },
-                { "Title", securityAttributionWithRank.Title },
+                { "Title", ReplaceEscapeCharacters(securityAttributionWithRank.Title) },
                 { "InputId", securityAttributionWithRank.InputId },
                 { "RankId", securityAttributionWithRank.RankId },
                 { "Ranks", securityAttributionWithRank.Ranks }
@@ -120,6 +122,17 @@ public class RationaleConverter
         }
 
         return result;
+    }
+
+    private static string ReplaceEscapeCharacters(string value)
+    {
+        value = value.Replace("&", "&amp;")
+            .Replace("<", "&lt;")
+            .Replace(">", "&gt;")
+            .Replace("\"", "&quot;")
+            .Replace("'", "&apos;");
+
+        return value;
     }
 
 

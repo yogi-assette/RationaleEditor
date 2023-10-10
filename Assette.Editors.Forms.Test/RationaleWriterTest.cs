@@ -102,7 +102,7 @@ public class FormGeneratorTest
         string rationaleXml = XmlGenerator.Create(structureData, _templatePath);
 
         IDocumentGenerator documentGenerator = new DocumentGenerator();
-        documentGenerator.Generate(_docPath, rationaleXml);
+        documentGenerator.GenerateByDocPath(_docPath, rationaleXml);
 
         Assert.True(true);
     }

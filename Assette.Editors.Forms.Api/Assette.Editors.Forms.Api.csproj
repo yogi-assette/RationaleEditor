@@ -6,4 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Assette.Editors.Forms.Mapper\Assette.Editors.Forms.Mapper.csproj" />
+    <ProjectReference Include="..\Assette.Editors.Forms\Assette.Editors.Forms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="templates\RationaleTemplate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

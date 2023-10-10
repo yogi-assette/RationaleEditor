@@ -6,11 +6,6 @@ public readonly record struct Rationale : ILiquidizable
 {
     //private readonly HashSet<Guid> _generatedGuids;
 
-    public Rationale()
-    {
-        //_generatedGuids = new HashSet<Guid>();
-    }
-
     //public string GenerateGuid()
     //{
     //    Guid guid = Guid.NewGuid();
